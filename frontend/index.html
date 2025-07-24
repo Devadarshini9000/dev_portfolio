@@ -762,15 +762,21 @@
         /* Contact Section */
         .contact {
             background-color: white;
+            padding: 60px 0; /* Reduced vertical padding to make the section more compact */
         }
 
         .contact-container {
             display: flex;
-            gap: 50px;
+            gap: 40px; /* Reduced gap between columns */
+            flex-direction: row; /* Display side-by-side on larger screens */
+            align-items: flex-start; /* Align the tops of the two columns */
+            max-width: 1100px; /* Constrain the width for a tighter layout */
+            margin: 0 auto; /* Center the container */
         }
 
         .contact-info {
             flex: 1;
+            text-align: left; /* Align text to the left for side-by-side view */
         }
 
         .contact-info h3 {
@@ -782,11 +788,13 @@
         .contact-info p {
             margin-bottom: 30px;
             color: #666;
+            max-width: 600px; /* Limit width for better readability */
         }
 
         .contact-method {
             display: flex;
             align-items: center;
+            justify-content: flex-start; /* Align contact methods to the left */
             margin-bottom: 20px;
         }
 
@@ -812,34 +820,26 @@
             margin: 0;
             color: #666;
         }
-
+        
+        /* Styles for the new "contact-form" section */
         .contact-form {
             flex: 1;
             background-color: var(--light-color);
-            padding: 40px;
+            padding: 30px; /* Further reduced padding for a more compact form */
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 500px; /* Limit width for better appearance */
+            width: 100%;
+            text-align: center; /* Center title and button within the form box */
         }
-
-        .form-group {
+        .contact-form h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
             margin-bottom: 20px;
         }
-
-        .form-control {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background-color: white;
-            font-family: inherit;
-            font-size: 1rem;
-            color: var(--text-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
+        .contact-form p {
+            color: #666;
+            margin-bottom: 25px; /* Reduced bottom margin */
         }
 
         /* Footer */
@@ -854,6 +854,7 @@
             flex-wrap: wrap;
             gap: 40px;
             margin-bottom: 40px;
+            justify-content: space-around; /* Adjusted for removed subscribe section */
         }
 
         .footer-info {
@@ -933,39 +934,8 @@
             color: var(--secondary-color);
             transform: translateX(5px);
         }
-
-        .footer-subscribe {
-            flex: 2;
-            min-width: 300px;
-        }
-
-        .footer-subscribe-form {
-            display: flex;
-            margin-top: 20px;
-        }
-
-        .footer-subscribe-input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 5px 0 0 5px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .footer-subscribe-btn {
-            padding: 15px 20px;
-            background-color: var(--secondary-color);
-            color: var(--light-text);
-            border: none;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .footer-subscribe-btn:hover {
-            background-color: var(--primary-color);
-        }
+        
+        /* Removed .footer-subscribe and related styles */
 
         .footer-bottom {
             text-align: center;
@@ -989,25 +959,25 @@
 
         /* Modal Styles */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            backdrop-filter: blur(5px); /* Blurred background */
             animation: fadeIn 0.3s ease;
         }
 
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto; 
+            margin: 15% auto; /* 15% from the top and centered */
             padding: 40px;
             border: 1px solid #888;
-            width: 90%;
+            width: 90%; /* Could be more responsive */
             max-width: 500px;
             border-radius: 15px;
             position: relative;
@@ -1032,6 +1002,28 @@
 
         .modal-content h3 { text-align: center; color: var(--primary-color); font-size: 1.8rem; margin-bottom: 10px; }
         .modal-content p { text-align: center; color: #666; margin-bottom: 25px; }
+
+        .form-group {
+            margin-bottom: 15px; /* Reduced margin for more compact forms */
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background-color: var(--light-color); /* Use light-color for form fields in modal */
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            resize: vertical; /* Allow vertical resizing for textareas */
+        }
+
+        /* Animations for modal */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
 
         /* Back to Top Button */
         .back-to-top {
@@ -1090,9 +1082,16 @@
             .timeline-item::after {
                 left: 21px;
             }
-
+            
             .contact-container {
-                flex-direction: column;
+                flex-direction: column; /* Ensure column layout on smaller screens */
+                align-items: center; /* Center items when stacked vertically */
+            }
+            .contact-info {
+                text-align: center; /* Re-center text when stacked */
+            }
+            .contact-method {
+                justify-content: center; /* Re-center contact methods when stacked */
             }
         }
 
@@ -1167,7 +1166,6 @@
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
     <header class="header" id="header">
         <div class="container">
             <nav class="nav-container">
@@ -1189,7 +1187,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero section" id="home">
         <div class="container">
             <div class="hero-content">
@@ -1198,21 +1195,19 @@
                 <p class="hero-description">A passionate Data Scientist with expertise in machine learning, web development, and data visualization. I transform complex data into actionable insights.</p>
                 <div class="hero-btns">
                     <a href="#projects" class="btn">View My Work</a>
-                    <a href="#contact" class="btn btn-outline">Contact Me</a>
                     <button id="resumeBtn" class="btn btn-outline">
                         <i class="fas fa-file-pdf"></i> Resume
                     </button>
                 </div>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/devadarshini-p-707b15202/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:devadarshini027@gmail.com" class="social-link" title="Send an Email"><i class="fas fa-envelope"></i></a>
+                    <a href="#contact" class="social-link" title="Send an Email"><i class="fas fa-envelope"></i></a>
                     <a href="https://github.com/Devadarshini9000" class="social-link"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="about section" id="about">
         <div class="container">
             <h2 class="section-title">About Me</h2>
@@ -1250,7 +1245,6 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section class="skills section" id="skills">
         <div class="container">
             <h2 class="section-title">My Skills</h2>
@@ -1293,7 +1287,6 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section class="experience section" id="experience">
         <div class="container">
             <h2 class="section-title">My Experience</h2>
@@ -1326,7 +1319,6 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section class="projects section" id="projects">
         <div class="container">
             <h2 class="section-title">My Projects</h2>
@@ -1461,7 +1453,6 @@
             </div>
     </section>
 
-    <!-- Education Section -->
     <section class="education section" id="education">
         <div class="container">
             <h2 class="section-title">My Education</h2>
@@ -1482,7 +1473,6 @@
         </div>
     </section>
 
-    <!-- Certifications Section -->
     <section class="certifications section" id="certifications">
         <div class="container">
             <h2 class="section-title">My Certifications</h2>
@@ -1534,14 +1524,13 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact section" id="contact">
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
             <p class="section-subtitle">Get in touch</p>
             <div class="contact-container">
                 <div class="contact-info">
-                    <h3>Let's Talk About Your Project</h3>
+                    <h3>Let's Connect!</h3>
                     <p>I'm interested in freelance opportunities and collaborations on exciting projects. Feel free to reach out if you'd like to work together or just say hello!</p>
                     <div class="contact-method">
                         <div class="contact-icon">
@@ -1572,28 +1561,29 @@
                     </div>
                 </div>
                 <div class="contact-form">
+                    <h3>Send Me a Message</h3>
+                    <p>Have a question or want to work together? Fill out the form below.</p>
                     <form id="contactForm">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+                            <input type="text" id="contactName" class="form-control" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                            <input type="email" id="contactEmail" class="form-control" name="email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="subject" placeholder="Subject">
+                            <input type="text" id="contactSubject" class="form-control" name="subject" placeholder="Subject" required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
+                            <textarea id="contactMessage" class="form-control" name="message" rows="4" placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit" class="btn">Send Message</button>
-                        <div id="formStatus" style="margin-top: 15px; text-align: center; font-weight: 500;"></div>
+                        <div id="contactFormStatus" style="margin-top: 15px; text-align: center; font-weight: 500;"></div>
                     </form>
                 </div>
-            </div>
+                </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-container">
@@ -1601,9 +1591,9 @@
                     <h3 class="footer-logo">Deva<span>darshini</span></h3>
                     <p class="footer-description">A passionate Data Scientist transforming complex data into actionable insights through innovative solutions.</p>
                     <div class="footer-social">
-                        <a href="https://www.linkedin.com/in/devadarshini-p-707b15202/" class="footer-social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="mailto:devadarshini027@gmail.com" class="footer-social-link"><i class="fas fa-envelope"></i></a>
-                        <a href="https://github.com/Devadarshini9000" class="footer-social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/devadarshini-p-707b15202/" class="footer-social-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#contact" class="footer-social-link" title="Contact Me"><i class="fas fa-envelope"></i></a>
+                        <a href="https://github.com/Devadarshini9000" class="footer-social-link" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -1614,15 +1604,6 @@
                     <a href="#projects" class="footer-link">Projects</a>
                     <a href="#contact" class="footer-link">Contact</a>
                 </div>
-                <div class="footer-subscribe">
-                    <h3 class="footer-title">Stay Updated</h3>
-                    <p>Subscribe to receive updates on my latest projects and achievements.</p>
-                    <form id="subscribeForm" class="footer-subscribe-form">
-                        <input type="email" id="subscribeEmail" class="footer-subscribe-input" placeholder="Your Email Address" required>
-                        <button type="submit" class="footer-subscribe-btn"><i class="fas fa-paper-plane"></i></button>
-                    </form>
-                    <div id="subscribeStatus" style="margin-top: 10px; font-size: 0.9rem;"></div>
-                </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Devadarshini P. All Rights Reserved.</p>
@@ -1630,15 +1611,13 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
     <a href="#home" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
-    <!-- Resume Request Modal -->
     <div id="resumeModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h3>Get My Resume</h3>
-            <p>Please enter your details below, and I'll email you a copy of my resume.</p>
+            <h3>Request My Resume</h3>
+            <p>Please enter your details below. My resume will be sent directly to your email address.</p>
             <form id="resumeRequestForm">
                 <div class="form-group">
                     <input type="text" id="resumeName" class="form-control" name="name" placeholder="Your Name" required>
@@ -1646,21 +1625,19 @@
                 <div class="form-group">
                     <input type="email" id="resumeEmail" class="form-control" name="email" placeholder="Your Email" required>
                 </div>
-                <button type="submit" class="btn">Send Resume</button>
+                <button type="submit" class="btn">Request Resume</button>
                 <div id="resumeFormStatus" style="margin-top: 15px; text-align: center; font-weight: 500;"></div>
             </form>
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
         // --- Configuration ---
         // IMPORTANT: Replace the placeholder URL below with your live Render backend URL once it's deployed.
-        // You can find this URL on your Render Web Service dashboard.
         // By setting API_BASE_URL to an empty string, the browser will automatically
         // use the current domain for API requests. This works for both local testing
         // (when served by Flask) and for the live Render deployment.
-        const API_BASE_URL = '';
+        const API_BASE_URL = ''; // Keep empty for relative paths on same host
 
         // Mobile Navigation Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1735,92 +1712,6 @@
             });
         });
 
-        // Form Submission
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const formStatus = document.getElementById('formStatus');
-
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
-            formStatus.textContent = '';
-
-            const formData = new FormData(contactForm);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'), 
-                subject: formData.get('subject'),
-                message: formData.get('message')
-            };
-            try { 
-                const response = await fetch(`${API_BASE_URL}/api/contact`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
- 
-                if (response.ok) {
-                    contactForm.reset();
-                    formStatus.textContent = "Thank you! Your message has been sent.";
-                    formStatus.style.color = 'var(--primary-color)';
-                } else {
-                    const errorData = await response.json().catch(() => ({}));
-                    const errorMessage = errorData.error || `Failed to send message. Status: ${response.status}`;
-                    throw new Error(errorMessage);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                formStatus.textContent = `Error: ${error.message}`;
-                formStatus.style.color = 'var(--accent-color)';
-            } finally {
-                // Restore the button after a few seconds
-                setTimeout(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-                }, 4000);
-            }
-        });
- 
-        // Newsletter Subscription
-        const subscribeForm = document.getElementById('subscribeForm');
-        const subscribeEmail = document.getElementById('subscribeEmail');
-        const subscribeStatus = document.getElementById('subscribeStatus');
-
-        subscribeForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const email = subscribeEmail.value;
-            subscribeStatus.textContent = 'Subscribing...';
-            subscribeStatus.style.color = 'var(--light-text)';
-
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/subscribe`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email })
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    subscribeStatus.textContent = result.message;
-                    subscribeStatus.style.color = 'var(--secondary-color)';
-                    subscribeForm.reset();
-                } else {
-                    throw new Error(result.error || 'Subscription failed.');
-                }
-            } catch (error) {
-                subscribeStatus.textContent = `Error: ${error.message}`;
-                subscribeStatus.style.color = 'var(--accent-color)';
-            } finally {
-                setTimeout(() => { subscribeStatus.textContent = ''; }, 5000);
-            }
-        });
-
         // Resume Modal Logic
         const resumeModal = document.getElementById('resumeModal');
         const resumeBtn = document.getElementById('resumeBtn');
@@ -1833,11 +1724,17 @@
 
         closeBtn.addEventListener('click', () => {
             resumeModal.style.display = 'none';
+            // Clear status message when closing
+            document.getElementById('resumeFormStatus').textContent = '';
+            document.getElementById('resumeRequestForm').reset(); // Reset form fields
         });
 
         window.addEventListener('click', (e) => {
             if (e.target == resumeModal) {
                 resumeModal.style.display = 'none';
+                // Clear status message when closing
+                document.getElementById('resumeFormStatus').textContent = '';
+                document.getElementById('resumeRequestForm').reset(); // Reset form fields
             }
         });
 
@@ -1852,7 +1749,7 @@
             const originalBtnText = resumeSubmitBtn.innerHTML;
             resumeSubmitBtn.disabled = true;
             resumeSubmitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
-            resumeFormStatus.textContent = '';
+            resumeFormStatus.textContent = ''; // Clear previous messages
 
             const data = {
                 name: document.getElementById('resumeName').value,
@@ -1870,16 +1767,71 @@
                     resumeRequestForm.reset();
                     resumeFormStatus.textContent = result.message;
                     resumeFormStatus.style.color = 'var(--primary-color)';
-                    setTimeout(() => { resumeModal.style.display = 'none'; resumeFormStatus.textContent = ''; }, 4000);
+                    // Optionally close modal after a short delay
+                    setTimeout(() => {
+                        resumeModal.style.display = 'none';
+                        resumeFormStatus.textContent = ''; // Clear message after closing
+                    }, 4000);
                 } else {
-                    throw new Error(result.error || 'An error occurred.');
+                    throw new Error(result.error || `Failed to send request. Status: ${response.status}`);
                 }
             } catch (error) {
+                console.error('Error:', error);
                 resumeFormStatus.textContent = `Error: ${error.message}`;
                 resumeFormStatus.style.color = 'var(--accent-color)';
             } finally {
-                resumeSubmitBtn.disabled = false;
-                resumeSubmitBtn.innerHTML = originalBtnText;
+                // Restore button state
+                setTimeout(() => {
+                    resumeSubmitBtn.disabled = false;
+                    resumeSubmitBtn.innerHTML = originalBtnText;
+                }, 4000); // Give user time to read status before button resets
+            }
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        const contactSubmitBtn = contactForm.querySelector('button[type="submit"]');
+        const contactFormStatus = document.getElementById('contactFormStatus');
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const originalBtnText = contactSubmitBtn.innerHTML;
+            contactSubmitBtn.disabled = true;
+            contactSubmitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
+            contactFormStatus.textContent = '';
+
+            const data = {
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                subject: document.getElementById('contactSubject').value,
+                message: document.getElementById('contactMessage').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/contact`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    contactForm.reset();
+                    contactFormStatus.textContent = result.message;
+                    contactFormStatus.style.color = 'var(--primary-color)';
+                } else {
+                    throw new Error(result.error || `Failed to send message. Status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                contactFormStatus.textContent = `Error: ${error.message}`;
+                contactFormStatus.style.color = 'var(--accent-color)';
+            } finally {
+                // Give user time to read status before button resets
+                setTimeout(() => {
+                    contactSubmitBtn.disabled = false;
+                    contactSubmitBtn.innerHTML = originalBtnText;
+                }, 4000);
             }
         });
 
@@ -1910,8 +1862,6 @@
                 backToTopBtn.classList.remove('visible');
             }
         });
-
-
     </script>
 </body>
 </html>
