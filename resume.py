@@ -16,13 +16,13 @@ def handle_resume_request():
         return jsonify({"error": "Database connection not available"}), 503
 
     data = request.get_json()
-    name = data.get('name')
-    email = data.get('email')
-
     if not data:
         return jsonify({"error": "Missing JSON in request body"}), 400
 
     errors = {}
+    name = data.get('name')
+    email = data.get('email')
+
     if not name:
         errors['name'] = 'Name is a required field.'
     if not email:
@@ -38,30 +38,24 @@ def handle_resume_request():
     }
 
     try:
-        email_subject = "Here is a copy of Devadarshini's Resume"
-        email_body = f"""Hello {name},
-
-Thank you for your interest in my profile! Please find my resume attached.
-
-Best regards,
-Devadarshini P"""
         attachment_path = os.path.join(Config.APP_ROOT, "frontend", "assets", "resume.pdf")
+        if not os.path.exists(attachment_path):
+            logging.critical("Resume PDF not found at expected path. Cannot process requests.")
+            return jsonify({"error": "Server configuration error: The requested file is currently unavailable."}), 503
+
+        email_subject = "Here is a copy of Devadarshini's Resume"
+        email_body = f"""Hello {name},\n\nThank you for your interest in my profile! Please find my resume attached.\n\nBest regards,\nDevadarshini P"""
         attachment_filename = "Devadarshini_P_Resume.pdf"
-
         success, status_message = send_email(email, email_subject, email_body, attachment_path, attachment_filename)
-
         request_record["email_status"] = "sent" if success else "failed"
         if not success:
             request_record["email_error"] = status_message
-
         db.resume_requests.insert_one(request_record)
         logging.info(f"DB record for resume request from: {name} ({email}) - Status: {request_record['email_status']}")
-
         if success:
             return jsonify({"success": True, "message": "Thank you! The resume has been sent to your email."}), 200
         else:
             return jsonify({"success": False, "message": "Your request was received, but we couldn't send the email. Please try again later."}), 500
-
     except Exception as e:
         logging.error(f"Error processing resume request: {e}")
         return jsonify({"error": "An internal server error occurred."}), 500
