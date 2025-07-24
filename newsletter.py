@@ -1,9 +1,9 @@
 import datetime
 import logging
 from flask import Blueprint, request, jsonify, current_app
-from ..utils import is_valid_email
+from .utils import is_valid_email
 from pymongo.errors import PyMongoError
-from ..extensions import limiter
+from .extensions import limiter
 
 newsletter_bp = Blueprint('newsletter', __name__)
 

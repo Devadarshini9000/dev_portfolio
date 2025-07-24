@@ -1,4 +1,5 @@
-from app import create_app
+from api import create_app
 
-# The WSGI entry point. Gunicorn will look for this 'app' object.
+# This is the entry point for the Gunicorn server.
+# It creates the Flask app instance.
 app = create_app()

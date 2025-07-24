@@ -1,10 +1,10 @@
 import datetime
 import logging
 from flask import Blueprint, request, jsonify, current_app
-from ..utils import is_valid_email, send_email
+from .utils import is_valid_email, send_email
 from pymongo.errors import PyMongoError
-from ..extensions import limiter
-from ..config import Config
+from .extensions import limiter
+from .config import Config
 
 contact_bp = Blueprint('contact', __name__)
 

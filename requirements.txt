@@ -1,8 +1,6 @@
-Flask
-Flask-Cors
-pymongo
-python-dotenv
-certifi
-gunicorn
-dnspython
-Flask-Limiter
+Flask==3.0.3
+Flask-Cors==4.0.1
+pymongo[srv]==4.7.2
+python-dotenv==1.0.1
+gunicorn==22.0.0
+Flask-Limiter==3.6.0
