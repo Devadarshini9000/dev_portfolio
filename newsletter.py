@@ -2,6 +2,7 @@ import datetime
 import logging
 from flask import Blueprint, request, jsonify, current_app
 from ..utils import is_valid_email
+from pymongo.errors import PyMongoError
 from ..extensions import limiter
 
 newsletter_bp = Blueprint('newsletter', __name__)
@@ -32,6 +33,6 @@ def handle_subscription():
         db.newsletter_subscribers.insert_one({"email": email, "timestamp": datetime.datetime.utcnow()})
         logging.info(f"New newsletter subscriber: {email}")
         return jsonify({"success": True, "message": "Thank you for subscribing!"}), 201
-    except Exception as e:
+    except PyMongoError as e:
         logging.error(f"Error inserting subscriber into DB: {e}")
         return jsonify({"error": "An internal error occurred."}), 500

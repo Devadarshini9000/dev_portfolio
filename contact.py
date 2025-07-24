@@ -2,6 +2,7 @@ import datetime
 import logging
 from flask import Blueprint, request, jsonify, current_app
 from ..utils import is_valid_email, send_email
+from pymongo.errors import PyMongoError
 from ..extensions import limiter
 from ..config import Config
 
@@ -63,6 +64,6 @@ Message:
             send_email(Config.RECIPIENT_EMAIL, email_subject, email_body)
 
         return jsonify({"success": True, "message": "Message received successfully!"}), 201
-    except Exception as e:
+    except PyMongoError as e:
         logging.error(f"Error inserting contact message into DB: {e}")
         return jsonify({"error": "An internal error occurred while saving the message."}), 500

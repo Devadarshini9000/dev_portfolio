@@ -1,7 +1,8 @@
 # Environment variables
+# Never commit this file!
 .env
 
-# Python
+# Python artifacts
 __pycache__/
 *.pyc
 *.pyo
@@ -9,11 +10,10 @@ __pycache__/
 
 # Virtual environment
 venv/
+.venv/
 env/
+.env/
 
-# IDE and editor directories
+# IDE / Editor specific
 .vscode/
 .idea/
-
-# OS-specific
-.DS_Store

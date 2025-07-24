@@ -3,6 +3,7 @@ import datetime
 import logging
 from flask import Blueprint, request, jsonify, current_app
 from ..utils import is_valid_email, send_email
+from pymongo.errors import PyMongoError
 from ..extensions import limiter
 from ..config import Config
 
@@ -56,6 +57,6 @@ def handle_resume_request():
             return jsonify({"success": True, "message": "Thank you! The resume has been sent to your email."}), 200
         else:
             return jsonify({"success": False, "message": "Your request was received, but we couldn't send the email. Please try again later."}), 500
-    except Exception as e:
+    except PyMongoError as e:
         logging.error(f"Error processing resume request: {e}")
         return jsonify({"error": "An internal server error occurred."}), 500
