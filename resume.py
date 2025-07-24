@@ -3,22 +3,35 @@ import datetime
 import logging
 from flask import Blueprint, request, jsonify, current_app
 from ..utils import is_valid_email, send_email
+from ..extensions import limiter
 from ..config import Config
 
 resume_bp = Blueprint('resume', __name__)
 
 @resume_bp.route('/request-resume', methods=['POST'])
+@limiter.limit("5 per hour; 20 per day")
 def handle_resume_request():
     db = current_app.db
-    if db.resume_requests is None:
+    if db is None:
         return jsonify({"error": "Database connection not available"}), 503
 
     data = request.get_json()
     name = data.get('name')
     email = data.get('email')
 
-    if not name or not email or not is_valid_email(email):
-        return jsonify({"error": "A valid name and email are required."}), 400
+    if not data:
+        return jsonify({"error": "Missing JSON in request body"}), 400
+
+    errors = {}
+    if not name:
+        errors['name'] = 'Name is a required field.'
+    if not email:
+        errors['email'] = 'Email is a required field.'
+    elif not is_valid_email(email):
+        errors['email'] = 'A valid email address format is required.'
+
+    if errors:
+        return jsonify({"error": "Validation failed", "details": errors}), 400
 
     request_record = {
         "name": name, "email": email, "timestamp": datetime.datetime.utcnow(), "email_status": "pending"

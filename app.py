@@ -2,13 +2,12 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
 import logging
 import certifi
 
 # Import configurations and blueprints
 from config import Config
+from extensions import limiter
 from api.contact import contact_bp
 from api.newsletter import newsletter_bp
 from api.resume import resume_bp
@@ -28,8 +27,9 @@ def create_app():
     CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
 
     # --- Rate Limiting ---
-    # Note: Specific limits should be applied in each blueprint file.
-    Limiter(get_remote_address, app=app, default_limits=["200 per day", "50 per hour"])
+    # Initialize the limiter with the app and set default rates.
+    limiter.init_app(app)
+    app.config["RATELIMIT_DEFAULT"] = "200 per day, 50 per hour"
 
     # --- MongoDB Connection ---
     try:
