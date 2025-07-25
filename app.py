@@ -1,8 +1,13 @@
 import os
-from dotenv import load_dotenv # Import load_dotenv
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
+
+# --- ADD THESE LINES HERE ---
+from gevent import monkey
+monkey.patch_all()
+# --- END ADDED LINES ---
 
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
@@ -18,11 +23,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.utils import formataddr
-
-
-# Import Flask-Limiter
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
 
 # Initialize Limiter here, as it's an extension
 limiter = Limiter(
