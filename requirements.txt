@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Flask
 python-dotenv
 flask-cors
@@ -6,3 +7,13 @@ Flask-Limiter
 gunicorn
 certifi
 gevent 
+=======
+Flask
+python-dotenv
+flask-cors
+pymongo
+Flask-Limiter
+gunicorn
+certifi
+gevent 
+>>>>>>> 894e991ec7769d519826cd861359b7116363aa43
