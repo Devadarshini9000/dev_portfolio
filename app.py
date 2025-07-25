@@ -25,6 +25,7 @@ from email.mime.application import MIMEApplication
 from email.utils import formataddr
 
 # --- Import Flask-Limiter components BEFORE using them ---
+# These imports MUST come before the 'limiter = Limiter(...)' line
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
@@ -143,7 +144,7 @@ def create_app():
     CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
 
     # --- Rate Limiting ---
-    limiter.init_app(app) # Initialize limiter with the app instance
+    limiter.init_app(app) # Initialize limiter with the app instance (this happens inside create_app)
 
     # --- Custom JSON Error Handlers ---
     @app.errorhandler(400)
