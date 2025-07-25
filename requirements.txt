@@ -1,9 +1,0 @@
-
-# requirements.txt
-Flask==2.3.3 # Use the version you tested with, or latest stable
-python-dotenv==1.0.0 # Or your version
-flask-cors==4.0.0 # Or your version
-pymongo==4.7.2 # Or your version
-Flask-Limiter==3.4.1 # Or your version
-gunicorn==22.0.0 # Essential for production web server
-certifi==2024.2.2 # Or your version
